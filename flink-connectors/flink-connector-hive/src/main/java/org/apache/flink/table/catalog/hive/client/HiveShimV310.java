@@ -32,6 +32,7 @@ import org.apache.hadoop.hive.metastore.IMetaStoreClient;
 import org.apache.hadoop.hive.metastore.RetryingMetaStoreClient;
 import org.apache.hadoop.hive.metastore.api.Table;
 import org.apache.hadoop.hive.ql.metadata.Hive;
+import org.apache.hadoop.hive.ql.metadata.HiveUtils;
 import org.apache.hadoop.io.Writable;
 
 import java.lang.reflect.Constructor;
@@ -50,6 +51,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /** Shim for Hive version 3.1.0. */
 public class HiveShimV310 extends HiveShimV239 {
@@ -133,13 +135,9 @@ public class HiveShimV310 extends HiveShimV239 {
     @Override
     public IMetaStoreClient getHiveMetastoreClient(HiveConf hiveConf) {
         try {
-            Method method =
-                    RetryingMetaStoreClient.class.getMethod(
-                            "getProxy", Configuration.class, Boolean.TYPE);
-            // getProxy is a static method
-            return (IMetaStoreClient) method.invoke(null, hiveConf, true);
-        } catch (Exception ex) {
-            throw new CatalogException("Failed to create Hive Metastore client", ex);
+            return HiveUtils.createMetaStoreClient(hiveConf, true, new ConcurrentHashMap());
+        } catch (Exception e) {
+            throw new CatalogException("Failed to create Hive Metastore client", e);
         }
     }
 

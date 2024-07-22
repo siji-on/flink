@@ -376,7 +376,7 @@ under the License.
 		<dependency>
 			<groupId>org.apache.hive</groupId>
 			<artifactId>hive-metastore</artifactId>
-			<version>${hive.version}</version>
+			<version>${hive.version}-ion</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -537,7 +537,7 @@ under the License.
 		<dependency>
 			<groupId>org.apache.hive</groupId>
 			<artifactId>hive-exec</artifactId>
-			<version>${hive.version}</version>
+			<version>${hive.version}-ion</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -844,6 +844,10 @@ under the License.
 				</exclusion>
 				<exclusion>
 					<groupId>org.apache.hive</groupId>
+					<artifactId>hive-common</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.hive</groupId>
 					<artifactId>hive-metastore</artifactId>
 				</exclusion>
 				<exclusion>
@@ -945,6 +949,10 @@ under the License.
 					<artifactId>hive-exec</artifactId>
 				</exclusion>
 				<exclusion>
+					<groupId>org.apache.hive</groupId>
+					<artifactId>hive-common</artifactId>
+				</exclusion>
+				<exclusion>
 					<groupId>com.google.guava</groupId>
 					<artifactId>guava</artifactId>
 				</exclusion>
@@ -1005,6 +1013,10 @@ under the License.
 			<version>${hive.version}</version>
 			<scope>test</scope>
 			<exclusions>
+				<exclusion>
+					<groupId>org.apache.hive</groupId>
+					<artifactId>hive-common</artifactId>
+				</exclusion>
 				<exclusion>
 					<groupId>org.jamon</groupId>
 					<artifactId>jamon-runtime</artifactId>
@@ -1120,6 +1132,10 @@ under the License.
 			<version>${hive.version}</version>
 			<scope>test</scope>
 			<exclusions>
+				<exclusion>
+					<groupId>org.apache.hive</groupId>
+					<artifactId>hive-common</artifactId>
+				</exclusion>
 				<exclusion>
 					<groupId>org.jamon</groupId>
 					<artifactId>jamon-runtime</artifactId>
